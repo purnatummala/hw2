@@ -9,6 +9,7 @@ import utils as u
 # ----------------------------------------------------------------------
 
 
+
 def question1():
     """
     Note 1: Each attribute can appear as a node in the tree AT MOST once.
@@ -23,64 +24,59 @@ def question1():
     level2_left = {}
     level2_right = {}
 
-    level1["smoking"] = 1.0
-    level1["smoking_info_gain"] = 0.2780719051126377
+    level1["smoking"] = 1
+    level1["smoking_info_gain"] = 0.1748
 
     level1["cough"] = -1
-    level1["cough_info_gain"] = 0.034851554559677034
+    level1["cough_info_gain"] = 0.0301
 
     level1["radon"] = -1
-    level1["radon_info_gain"] = 0.2364527976600279
+    level1["radon_info_gain"] = 0.164
 
     level1["weight_loss"] = -1
-    level1["weight_loss_info_gain"] = 0.02904940554533142
+    level1["weight_loss_info_gain"] = 0.0202
 
     level2_left["smoking"] = -1
-    level2_left["smoking_info_gain"] = 0
-
+    level2_left["smoking_info_gain"] = -1
     level2_right["smoking"] = -1
-    level2_right["smoking_info_gain"] = 0
+    level2_right["smoking_info_gain"] = -1
 
     level2_left["radon"] = -1
-    level2_left["radon_info_gain"] = 0
+    level2_left["radon_info_gain"] = 0.3897
+    level2_right["radon"] = 1
+    level2_right["radon_info_gain"] = 0.5004
 
-    level2_left["cough"] = 1.0
-    level2_left["cough_info_gain"] = 0.7219280948873623
+    level2_left["cough"] = 1
+    level2_left["cough_info_gain"] = 0.673
+    level2_right["cough"] = -1
+    level2_right["cough_info_gain"] = 0.2231
 
     level2_left["weight_loss"] = -1
-    level2_left["weight_loss_info_gain"] = -1
-
-    level2_right["radon"] = 1.0
-    level2_right["radon_info_gain"] = 0.7219280948873623
-
-    level2_right["cough"] = -1
-    level2_right["cough_info_gain"] = -1
-
+    level2_left["weight_loss_info_gain"] = 0.0364 
     level2_right["weight_loss"] = -1
-    level2_right["weight_loss_info_gain"] = -1
+    level2_right["weight_loss_info_gain"] = 0.1185
+    
 
     answer["level1"] = level1
     answer["level2_left"] = level2_left
     answer["level2_right"] = level2_right
 
     # Fill up `construct_tree``
-    # tree, training_error = construct_tree() 
-        
-    tree = u.BinaryTree('Smoking Tobacco')
-
-    cough = tree.insert_left('Chronic Cough')
-    radon = tree.insert_left('Radon Exposure')
-
-    cough.insert_right(1)
-    cough.insert_left(4)
-
-    radon.insert_left(1)
-    radon.insert_right(4)
-    answer["tree"] = tree  
+    # tree, training_error = construct_tree()
+    
+    tree = u.BinaryTree("Tobacco Smoking")
+    A = tree.insert_left("Chronic Cough")
+    B = tree.insert_right("Radon Exposure")
+    
+    A.insert_left("Yes")
+    A.insert_right("No")
+    B.insert_left("Yes")
+    B.insert_right("No")
+    
+    answer["tree"] = tree
+    
+    # answer["training_error"] = training_error
     answer["training_error"] = 0.0  
-
-
-
 
     return answer
 
@@ -91,39 +87,43 @@ def question1():
 def question2():
     answer = {}
 
-    answer["(a) entropy_entire_data"] = 1.4253642047367425
+    # Answers are floats
+    answer["(a) entropy_entire_data"] = 1.4253
+    
+    # Infogain
+    answer["(b) x < 0.2"] = 0.2147
+    answer["(b) x < 0.7"] = 0.3739
+    answer["(b) y < 0.6"] = 0.4979
 
-    answer["(b) x <= 0.2"] = 0.17739286055515824
-    answer["(b) x <= 0.7"] = 0.3557029418697566
-    answer["(b) y <= 0.6"] = 0.34781842724338197
-
-    # choose one of 'x=0.2', 'x=0.7', or 'x=0.6'
+    # choose one of 'x=0.2', 'x=0.7', or 'y=0.6'
     answer["(c) attribute"] = "y=0.6"  
 
     # Use the Binary Tree structure to construct the tree
     # Answer is an instance of BinaryTree
-    tree = u.BinaryTree("y <= 0.6")
-    left = tree.insert_left("x <= 0.7")
-    right = tree.insert_right("x <= 0.2")
-
-    left.insert_left("B")
     
-    y_03 = left.insert_right("y <= 0.3")
-    y_03.insert_left("A")
-    y_03.insert_right("C")
-
-    right.insert_right("A")
-    y_08 = right.insert_left("y <= 0.8")
-    y_08.insert_right("B")
-    y_08.insert_left("C")
-
+    #ASSUME LEF MEANS "TRUE" AND RIGHT MEANS "FALSE"
+    tree = u.BinaryTree("y<=0.6")
+    
+    A = tree.insert_left("x<=0.7")
+    A.insert_left("B")
+    
+    B = A.insert_right("y<=0.3")
+    B.insert_left("A")
+    B.insert_right("C")
+    
+    C = tree.insert_right("x<=0.2")
+    C.insert_right("A")
+    
+    D = C.insert_left("y<=0.8")
+    D.insert_left("C")
+    D.insert_right("B")
+    
     answer["(d) full decision tree"] = tree
 
     return answer
 
 
 # ----------------------------------------------------------------------
-
 
 def question3():
     answer = {}
