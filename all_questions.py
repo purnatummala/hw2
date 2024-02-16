@@ -166,12 +166,11 @@ def question4():
     interval = 'interval'
     ratio = 'ratio'
 
-    # Paraphrased explanations
     continuous_exp = 'Measures that can be infinitely divided, offering an unending scale of values.'
     quantitative_exp = 'The importance of the data lies in its numerical representation.'
     ratio_exp = 'The presence of an absolute zero allows for meaningful comparisons and calculations.'
     
-    # Assignments and explanations
+
     answer["a"] = [continuous, quantitative, ratio]
     answer["a: explain"] = "This classification is due to the ability to divide measures indefinitely, emphasizing the numerical importance and the existence of an absolute zero point which cannot be surpassed, symbolizing a fundamental starting point."
 
@@ -220,7 +219,7 @@ def question4():
 def question5():
     explain = {}
 
-    # Reinterpreted explanations for the choice between two models based on their performance and approach to handling data
+
 
     explain["a"] = "Model 2"
     explain["a explain"] = "Opting for Model 2 due to its superior performance on test data, indicating better generalization capabilities. Model 1 demonstrates a tendency towards overfitting, evident from its significantly higher training accuracy compared to its test accuracy, suggesting it may not perform as well on new, unseen data."
@@ -248,16 +247,12 @@ def question6():
     answer["a, level 3, left"] = "B"   # The bottom left square (0.2*0.4) area is class B
     answer["a, level 3, right"] = "A"  # The rest above the y=0.6 line is class A
 
-    # Calculate the expected error rate based on misclassified areas
-    # The misclassified area for class B is the top left corner, not covered by the decision tree
-    # Therefore, the error is the area of B not covered by the tree (0.2 * 0.4)
-    # The area of B is 0.2 width * 0.4 height = 0.08
-    # The total area is 1, so the expected error rate is the area of B divided by the total area
+
     misclassified_area = 0.08
     total_area = 1
     answer["b, expected error"] = misclassified_area / total_area
 
-    # Define the binary tree using the provided u.BinaryTree class and the nodes created above
+    
     tree = u.BinaryTree("x <= 0.8")
     left_node = tree.insert_left("y <= 0.6")
     right_node = tree.insert_right("A")
